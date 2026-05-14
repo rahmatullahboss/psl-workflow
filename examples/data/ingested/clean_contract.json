@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "source_path": "examples/data/samples/clean_contract.pdf",
+    "document_type": "pdf",
+    "page_count": 2,
+    "title": "untitled",
+    "author": "anonymous",
+    "created_at": "D:20260514162401+06'00'",
+    "extra": {
+      "format": "PDF 1.3"
+    }
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "Pearson Specter Litt - Internal Contract Packet\nMatter: Wayne Logistics acquisition review\nClause 4.2 Notice Before Termination:\nEither party must provide ten business days written notice before termination.\nClause 7.1 Termination Fee:\nA termination fee of USD 2,500,000 is payable if Wayne exits after diligence.\nClause 9.3 Confidentiality:\nThe parties must keep diligence materials confidential for three years.",
+      "extraction_method": "pymupdf",
+      "metadata": {
+        "width": 612.0,
+        "height": 792.0,
+        "source_kind": "embedded-text"
+      }
+    },
+    {
+      "page_number": 2,
+      "text": "Operator note:\nThe client asked whether immediate termination is available.\nThe record supports a notice-first recommendation and a high risk label.",
+      "extraction_method": "pymupdf",
+      "metadata": {
+        "width": 612.0,
+        "height": 792.0,
+        "source_kind": "embedded-text"
+      }
+    }
+  ],
+  "raw_text": "Pearson Specter Litt - Internal Contract Packet\nMatter: Wayne Logistics acquisition review\nClause 4.2 Notice Before Termination:\nEither party must provide ten business days written notice before termination.\nClause 7.1 Termination Fee:\nA termination fee of USD 2,500,000 is payable if Wayne exits after diligence.\nClause 9.3 Confidentiality:\nThe parties must keep diligence materials confidential for three years.\n\nOperator note:\nThe client asked whether immediate termination is available.\nThe record supports a notice-first recommendation and a high risk label."
+}

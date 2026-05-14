@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "source_path": "examples/data/samples/scanned_notice.pdf",
+    "document_type": "pdf",
+    "page_count": 1,
+    "title": "untitled",
+    "author": "anonymous",
+    "created_at": "D:20260514162401+06'00'",
+    "extra": {
+      "format": "PDF 1.3"
+    }
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "",
+      "extraction_method": "ocr-unavailable",
+      "metadata": {
+        "width": 612.0,
+        "height": 792.0,
+        "source_kind": "rendered-page",
+        "ocr_engine": "unavailable",
+        "ocr_error": "Install the tesseract binary or optional EasyOCR dependency for OCR text."
+      }
+    }
+  ],
+  "raw_text": ""
+}

@@ -1,0 +1,3 @@
+# Optional OCR backend. The core pipeline uses Tesseract through pytesseract.
+# Install this only when GPU/CPU budget permits the PyTorch dependency tree.
+easyocr>=1.7.1

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+*.egg-info/
+.env
+data/chroma/
+data/feedback.sqlite3
+data/ingested/*.json
+/outputs/
+examples/data/chroma/
+examples/data/feedback.sqlite3

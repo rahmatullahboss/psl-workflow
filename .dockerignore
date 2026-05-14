@@ -1,0 +1,8 @@
+.venv
+.git
+__pycache__
+.pytest_cache
+.ruff_cache
+examples/data/chroma
+examples/data/feedback.sqlite3
+data

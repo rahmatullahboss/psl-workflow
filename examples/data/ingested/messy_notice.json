@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "source_path": "examples/data/samples/messy_notice.png",
+    "document_type": "image",
+    "page_count": 1,
+    "title": "messy_notice",
+    "author": null,
+    "created_at": null,
+    "extra": {
+      "image_suffix": ".png"
+    }
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "",
+      "extraction_method": "ocr-unavailable",
+      "metadata": {
+        "ocr_engine": "unavailable",
+        "ocr_error": "Install the tesseract binary or optional EasyOCR dependency for OCR text."
+      }
+    }
+  ],
+  "raw_text": ""
+}
