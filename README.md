@@ -183,6 +183,19 @@ Future drafts call `StyleMemory.build_prompt_context(query)`, which ranks prior 
 - ChromaDB is embedded for a self-contained assessment build. A production deployment would likely separate vector storage, object storage, and audit logs.
 - The local fallback drafter is intentionally conservative and deterministic. Set `OPENAI_API_KEY` for GPT-4-class drafting.
 
+## Ollama Cloud
+
+This project can use Ollama Cloud directly, not only local Ollama. Set:
+
+```bash
+export LLM_PROVIDER=ollama
+export OLLAMA_BASE_URL=https://ollama.com
+export OLLAMA_API_KEY=your_ollama_cloud_api_key
+export OLLAMA_MODEL=gpt-oss:120b
+```
+
+The app calls `https://ollama.com/api/generate` with `Authorization: Bearer $OLLAMA_API_KEY`.
+
 ## Docker
 
 ```bash

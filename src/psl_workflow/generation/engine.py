@@ -1,8 +1,10 @@
-from __future__ import annotations
-
+import json
 import os
 from dataclasses import dataclass
+from pathlib import PurePosixPath
 from typing import Protocol
+from urllib import request
+from urllib.error import URLError
 
 from psl_workflow.learning.memory import StyleMemory
 from psl_workflow.retrieval.models import RetrievedSnippet
@@ -116,8 +118,67 @@ class OpenAIDraftLLM:
         return content or "Insufficient sourced evidence to draft a grounded memo."
 
 
+class OllamaDraftLLM:
+    """Ollama adapter for local Ollama or Ollama Cloud."""
+
+    def __init__(self, model: str | None = None, base_url: str | None = None) -> None:
+        self.model = model or os.getenv("OLLAMA_MODEL", "gpt-oss:120b")
+        self.base_url = (
+            base_url or os.getenv("OLLAMA_BASE_URL", "https://ollama.com")
+        ).rstrip("/")
+        self.api_key = os.getenv("OLLAMA_API_KEY")
+
+    def generate_memo(
+        self,
+        *,
+        question: str,
+        snippets: list[RetrievedSnippet],
+        memory_context: str,
+        prompt: str,
+    ) -> str:
+        del question, snippets, memory_context
+        payload = json.dumps(
+            {
+                "model": self.model,
+                "prompt": (
+                    "You draft internal legal memos for Pearson Specter Litt. "
+                    "Only use cited evidence.\n\n"
+                    f"{prompt}"
+                ),
+                "stream": False,
+                "options": {"temperature": 0.2},
+            }
+        ).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+
+        http_request = request.Request(
+            self._endpoint("generate"),
+            data=payload,
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with request.urlopen(http_request, timeout=120) as response:
+                body = json.loads(response.read().decode("utf-8"))
+        except (OSError, URLError, TimeoutError) as exc:
+            raise RuntimeError(f"Ollama request failed: {exc}") from exc
+        return body.get("response") or "Insufficient sourced evidence to draft a grounded memo."
+
+    def _endpoint(self, endpoint: str) -> str:
+        base = self.base_url.rstrip("/")
+        if base.endswith("/api"):
+            return f"{base}/{endpoint.lstrip('/')}"
+        path = PurePosixPath("/api") / endpoint.lstrip("/")
+        return f"{base}{path}"
+
+
 def build_default_llm() -> DraftLLM:
-    if os.getenv("OPENAI_API_KEY"):
+    provider = os.getenv("LLM_PROVIDER", "").lower().strip()
+    if provider == "ollama":
+        return OllamaDraftLLM()
+    if provider == "openai" or os.getenv("OPENAI_API_KEY"):
         return OpenAIDraftLLM()
     return LocalDraftLLM()
 
