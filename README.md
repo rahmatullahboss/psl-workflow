@@ -196,11 +196,49 @@ export OLLAMA_MODEL=gpt-oss:120b
 
 The app calls `https://ollama.com/api/generate` with `Authorization: Bearer $OLLAMA_API_KEY`.
 
-## Docker
+## Docker (Local)
 
 ```bash
 docker build -t psl-workflow .
 docker run --rm -p 8000:8000 --env-file .env psl-workflow
+```
+
+## VPS Deployment
+
+The system is deployed on a VPS with Cloudflare tunnel for public access.
+
+**Live UI:** https://psl.online-bazar.top/
+
+**VPS Setup:**
+```bash
+# SSH into VPS
+ssh -i ~/.ssh/your_key root@161.248.188.253
+
+# Check container status
+docker ps
+docker logs psl-workflow --tail 20
+
+# Environment variables (set in docker-compose or .env)
+LLM_PROVIDER=local                    # local, openai, or ollama
+OLLAMA_BASE_URL=https://ollama.com    # for Ollama Cloud
+OLLAMA_MODEL=gpt-oss:120b
+OPENAI_API_KEY=sk-xxx                 # for OpenAI (optional)
+PORT=8000
+
+# Health check
+curl http://127.0.0.1:8010/health
+```
+
+**Port Mapping:** Container runs on `127.0.0.1:8010` → exposed via Cloudflare tunnel
+
+**API Docs:** https://psl.online-bazar.top/docs
+
+**Update Deployment:**
+```bash
+docker pull rahmatullahboss/psl-workflow:latest
+docker stop psl-workflow && docker rm psl-workflow
+docker run -d --name psl-workflow -p 127.0.0.1:8010:8000 \
+  --env-file .env psl-workflow
 ```
 
 ## Submission Checklist
