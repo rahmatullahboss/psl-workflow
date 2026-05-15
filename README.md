@@ -211,8 +211,8 @@ The system is deployed on a VPS with Cloudflare tunnel for public access.
 
 **VPS Setup:**
 ```bash
-# SSH into VPS
-ssh -i ~/.ssh/your_key root@161.248.188.253
+# SSH into VPS (replace with your credentials)
+ssh -i ~/.ssh/your_key root@YOUR_VPS_IP
 
 # Check container status
 docker ps
